@@ -1,7 +1,6 @@
-package com.temalabor.temalabor.model;
+package com.temalabor.temalab.model;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 
 public class Image {
     @Id

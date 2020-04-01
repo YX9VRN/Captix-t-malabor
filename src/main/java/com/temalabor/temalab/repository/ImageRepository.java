@@ -1,6 +1,6 @@
-package com.temalabor.temalabor.repository;
+package com.temalabor.temalab.repository;
 
-import com.temalabor.temalabor.model.Image;
+import com.temalabor.temalab.model.Image;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface ImageRepository extends MongoRepository<Image, String> {

@@ -1,8 +1,7 @@
-package com.temalabor.temalabor.model;
+package com.temalabor.temalab.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Document("users")
 public class User {

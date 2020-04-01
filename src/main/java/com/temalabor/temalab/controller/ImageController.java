@@ -1,7 +1,7 @@
-package com.temalabor.temalabor.controller;
+package com.temalabor.temalab.controller;
 
-import com.temalabor.temalabor.model.Image;
-import com.temalabor.temalabor.repository.ImageRepository;
+import com.temalabor.temalab.model.Image;
+import com.temalabor.temalab.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

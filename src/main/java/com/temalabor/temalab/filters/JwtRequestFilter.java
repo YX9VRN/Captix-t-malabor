@@ -1,7 +1,7 @@
-package com.temalabor.temalabor.filters;
+package com.temalabor.temalab.filters;
 
-import com.temalabor.temalabor.UserDetailServiceImpl;
-import com.temalabor.temalabor.util.JwtUtil;
+import com.temalabor.temalab.UserDetailServiceImpl;
+import com.temalabor.temalab.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -1,4 +1,4 @@
-package com.temalabor.temalabor.util;
+package com.temalabor.temalab.util;
 
 import java.util.Date;
 import java.util.HashMap;

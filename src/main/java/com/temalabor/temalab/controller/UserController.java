@@ -1,11 +1,11 @@
-package com.temalabor.temalabor.controller;
+package com.temalabor.temalab.controller;
 
-import com.temalabor.temalabor.UserDetailServiceImpl;
-import com.temalabor.temalabor.model.AuthenticationRequest;
-import com.temalabor.temalabor.model.AuthenticationResponse;
-import com.temalabor.temalabor.model.User;
-import com.temalabor.temalabor.repository.UserRepository;
-import com.temalabor.temalabor.util.JwtUtil;
+import com.temalabor.temalab.UserDetailServiceImpl;
+import com.temalabor.temalab.model.AuthenticationRequest;
+import com.temalabor.temalab.model.AuthenticationResponse;
+import com.temalabor.temalab.model.User;
+import com.temalabor.temalab.repository.UserRepository;
+import com.temalabor.temalab.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

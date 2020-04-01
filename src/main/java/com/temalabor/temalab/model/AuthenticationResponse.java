@@ -1,4 +1,4 @@
-package com.temalabor.temalabor.model;
+package com.temalabor.temalab.model;
 
 import java.io.Serializable;
 
