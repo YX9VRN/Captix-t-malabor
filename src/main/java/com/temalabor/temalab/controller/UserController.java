@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
+@CrossOrigin( origins = "*")
 @RestController
 public class UserController {
     @Autowired
@@ -40,14 +40,13 @@ public class UserController {
     public List<User> getAllUser(){
         return userRepository.findAll();
     }
-
-    @CrossOrigin
+    
     @PostMapping(value = "/users")
     public User newUser(@RequestBody User user){
         userRepository.save(user);
         return user;
     }
-
+    @CrossOrigin
     @PostMapping(value = "/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 
