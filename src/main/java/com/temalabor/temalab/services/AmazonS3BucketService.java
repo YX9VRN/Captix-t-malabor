@@ -7,6 +7,9 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.temalabor.temalab.model.Image;
+import com.temalabor.temalab.repository.ImageRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,6 +33,10 @@ public class AmazonS3BucketService {
     @Value("${secretKey}")
     private String secretKey;
 
+    @Autowired
+    private ImageRepository imageRepository;
+
+
     @PostConstruct
     private void initializeAmazon() {
         AWSCredentials credentials = new BasicAWSCredentials(this.accessKey, this.secretKey);
@@ -43,11 +50,16 @@ public class AmazonS3BucketService {
             String fileName = multipartFile.getOriginalFilename();
             fileURL = endpointUrl + "/" + bucketName + "/" + fileName;
             uploadFileToBucket(fileName, file);
+            saveImageToDatabase(fileName, endpointUrl+"/"+fileName);
             file.delete();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return fileURL;
+    }
+    public void saveImageToDatabase(String title, String url){
+        imageRepository.save(new Image(title,url));
     }
 
     private File convertMultipartFileToFile(MultipartFile file) throws IOException {

@@ -16,8 +16,5 @@ public class ImageController {
     public List<Image> getImages(){
         return repository.findAll();
     }
-    @PostMapping(value = "/images")
-    public Image newImage(@RequestBody Image image){
-        return repository.save(image);
-    }
+
 }
