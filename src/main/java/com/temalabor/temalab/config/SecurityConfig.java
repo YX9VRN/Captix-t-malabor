@@ -40,14 +40,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
-
-        httpSecurity.csrf().disable()
-                .authorizeRequests().antMatchers("/uploadFile").permitAll().and().authorizeRequests().antMatchers("/images")
+            httpSecurity.csrf().disable()
+                .authorizeRequests().antMatchers("/images").permitAll().and().authorizeRequests().antMatchers("/authenticate")
                 .permitAll().anyRequest().authenticated().and().
                 exceptionHandling().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-
 
     }
 }

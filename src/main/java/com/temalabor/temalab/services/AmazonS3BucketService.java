@@ -7,8 +7,8 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.temalabor.temalab.model.Image;
-import com.temalabor.temalab.repository.ImageRepository;
+import org.apache.commons.io.FilenameUtils;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -33,9 +33,6 @@ public class AmazonS3BucketService {
     @Value("${secretKey}")
     private String secretKey;
 
-    @Autowired
-    private ImageRepository imageRepository;
-
 
     @PostConstruct
     private void initializeAmazon() {
@@ -47,19 +44,16 @@ public class AmazonS3BucketService {
         String fileURL = "";
         try {
             File file = convertMultipartFileToFile(multipartFile);
-            String fileName = multipartFile.getOriginalFilename();
-            fileURL = endpointUrl + "/" + bucketName + "/" + fileName;
-            uploadFileToBucket(fileName, file);
-            saveImageToDatabase(fileName, endpointUrl+"/"+fileName);
-            file.delete();
+            String id = new ObjectId().toString();
+            String originalFileName = multipartFile.getOriginalFilename();
+            String extension = FilenameUtils.getExtension(originalFileName);
+            String uniqueFilename = id+"."+extension;
+            fileURL = endpointUrl + "/" + uniqueFilename;
+            uploadFileToBucket(uniqueFilename, file);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return fileURL;
-    }
-    public void saveImageToDatabase(String title, String url){
-        imageRepository.save(new Image(title,url));
     }
 
     private File convertMultipartFileToFile(MultipartFile file) throws IOException {

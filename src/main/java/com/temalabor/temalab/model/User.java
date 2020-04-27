@@ -3,14 +3,20 @@ package com.temalabor.temalab.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotNull;
+
 @Document("users")
 public class User {
 
     @Id
     private String _id;
+    @NotNull
     private String username;
     private String email;
     private String password;
+    private int rating;
+    private boolean isAdmin;
+    private String profilePictureUrl;
     public  User(){}
 
     public User(String username, String email, String password) {

@@ -18,52 +18,29 @@ import java.util.List;
 import java.util.Optional;
 @CrossOrigin( origins = "*")
 @RestController
+@RequestMapping("/users")
 public class UserController {
-    @Autowired
-    private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private JwtUtil jwtTokenUtil;
-
-    @Autowired
-    private UserDetailServiceImpl userDetailsService;
 
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping(value = "/users/{_id}")
+    @GetMapping(value = "/{_id}")
     public Optional<User> getUserById(@PathVariable("_id") String _id){
         return userRepository.findById(_id);
     }
 
-    @GetMapping(value = "/users")
+    @GetMapping()
     public List<User> getAllUser(){
         return userRepository.findAll();
     }
     
-    @PostMapping(value = "/users")
-    public User newUser(@RequestBody User user){
+    @PostMapping()
+    public String newUser(@RequestBody User user){
+        if (userRepository.findByUsername(user.getUsername()) != null){
+            return "Wrong username";
+        }
         userRepository.save(user);
-        return user;
-    }
-    @CrossOrigin
-    @PostMapping(value = "/authenticate")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
-
-        try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
-            );
-        }
-        catch (BadCredentialsException e) {
-            throw new Exception("Incorrect username or password", e);
-        }
-
-        final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(authenticationRequest.getUsername());
-
-        final String jwt = jwtTokenUtil.generateToken(userDetails);
-
-        return ResponseEntity.ok(new AuthenticationResponse(jwt));
+        return "User saved";
     }
 }

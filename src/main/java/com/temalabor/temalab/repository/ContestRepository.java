@@ -1,4 +1,8 @@
 package com.temalabor.temalab.repository;
 
-public interface ContestRepository {
+import com.temalabor.temalab.model.Contest;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+public interface ContestRepository extends MongoRepository<Contest, String> {
+
 }
