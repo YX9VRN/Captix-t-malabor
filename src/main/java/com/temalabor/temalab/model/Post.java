@@ -14,6 +14,7 @@ public class Post {
     private String username;
     private String imageUrl;
     private String caption;
+    private String description;
     private List<Comment> comments;
     private int rating;
     @CreatedDate
@@ -81,5 +82,13 @@ public class Post {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

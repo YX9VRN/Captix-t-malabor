@@ -2,13 +2,9 @@ package com.temalabor.temalab.controller;
 
 import com.temalabor.temalab.model.Post;
 import com.temalabor.temalab.repository.PostRepository;
-import com.temalabor.temalab.services.AmazonS3BucketService;
-import com.temalabor.temalab.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -38,5 +34,4 @@ public class PostController {
         }
         return postRepository.findAll();
     }
-
 }
