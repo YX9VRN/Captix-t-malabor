@@ -1,27 +1,25 @@
 package com.temalabor.temalab.model;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
-
-import java.time.LocalDateTime;
 public class Comment {
 
     @Id
-    private String _id = new ObjectId().toString();
-    private String user_id;
+    private String _id ;
+    private String userId;
     private String content;
+    private String postId;
 
     public String get_id() {
         return _id;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser_id(String userId) {
-        this.user_id = userId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getContent() {
@@ -32,4 +30,15 @@ public class Comment {
         this.content = content;
     }
 
+    public String getPostId() {
+        return postId;
+    }
+
+    public void setPostId(String postId) {
+        this.postId = postId;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 }

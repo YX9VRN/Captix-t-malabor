@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 @Controller
+@CrossOrigin(origins = "**")
 public class OperationsController {
 
     @Autowired
@@ -23,7 +24,6 @@ public class OperationsController {
     private UserDetailServiceImpl userDetailsService;
     @Autowired
     private AuthenticationManager authenticationManager;
-    @CrossOrigin
     @PostMapping(value = "/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 

@@ -1,5 +1,6 @@
 package com.temalabor.temalab.model;
 
+import com.mongodb.lang.Nullable;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -18,12 +19,6 @@ public class User {
     private boolean isAdmin;
     private String profilePictureUrl;
     public  User(){}
-
-    public User(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
 
     public String get_id() {
         return _id;

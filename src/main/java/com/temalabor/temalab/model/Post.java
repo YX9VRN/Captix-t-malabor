@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
-import java.util.List;
+
 @Document
 public class Post {
     @Id
@@ -15,8 +15,8 @@ public class Post {
     private String imageUrl;
     private String caption;
     private String description;
-    private List<Comment> comments;
-    private int rating;
+    private int upVote;
+    private int downVote;
     @CreatedDate
     private LocalDateTime dateOfCreation;
     private String categoryName;
@@ -26,14 +26,6 @@ public class Post {
 
     public void set_id(String _id) {
         this._id = _id;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
     }
 
     public LocalDateTime getDateOfCreation() {
@@ -52,12 +44,20 @@ public class Post {
         this.caption = caption;
     }
 
-    public int getRating() {
-        return rating;
+    public int getUpVote() {
+        return upVote;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
+    public void setUpVote(int upVote) {
+        this.upVote = upVote;
+    }
+
+    public int getDownVote() {
+        return downVote;
+    }
+
+    public void setDownVote(int downVote) {
+        this.downVote = downVote;
     }
 
     public String getImageUrl() {

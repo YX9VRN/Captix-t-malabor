@@ -41,8 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
             httpSecurity.csrf().disable()
-                .authorizeRequests().antMatchers("/authenticate").permitAll().and().authorizeRequests().antMatchers("/uploadFile")
-                .permitAll().and().authorizeRequests().antMatchers("/posts")
+                .authorizeRequests().antMatchers("/**").permitAll().and().authorizeRequests().antMatchers("/uploadFile")
+                .permitAll().and().authorizeRequests().antMatchers("/posts/**")
                 .permitAll().anyRequest().authenticated().and().
                 exceptionHandling().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
