@@ -17,13 +17,13 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/posts")
-@CrossOrigin(origins = "http://localhost:4200")
 public class PostController {
     @Autowired
     private PostRepository postRepository;
 
     @Autowired
     private CommentRepository commentRepository;
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public Post newPost(@RequestBody Post post){
@@ -32,6 +32,7 @@ public class PostController {
         postRepository.save(post);
         return post;
     }
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping()
     public List<Post> getPostsByCategory(@RequestParam(value = "category", required = false) String category){
         if(category != null) {
@@ -39,14 +40,17 @@ public class PostController {
         }
         return postRepository.findAll();
     }
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value = "/{id}")
     public Optional<Post> getPostsById(@PathVariable("id") String id) {
         return postRepository.findById(id);
     }
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value = "/{id}/comments")
     public ResponseEntity<?> getComments(@PathVariable("id") String id){
         return ResponseEntity.ok(commentRepository.findAllByPostId(id));
     }
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(value = {"/{id}/comments"})
     public ResponseEntity<?> addNewComment(@PathVariable("id") String id, @RequestBody Comment comment){
         UserDetails details = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -54,12 +58,13 @@ public class PostController {
         comment.setPostId(id);
         return ResponseEntity.ok(commentRepository.save(comment));
     }
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping(value = "/{id}/comments/{commentId}")
     public ResponseEntity<String> deleteComment(@PathVariable("id") String id, @PathVariable("commentId") String commentId){
         commentRepository.deleteById(commentId);
         return ResponseEntity.ok("Comment with "+commentId+" has been deleted");
     }
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(value = "/{id}/vote")
     public void addVote(@PathVariable("id") String id,@RequestBody VoteRequest vote){
         Optional<Post> post = postRepository.findById(id);
