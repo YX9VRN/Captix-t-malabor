@@ -10,8 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+@Controller
 @CrossOrigin(origins = "http://localhost:4200")
-@RestController
 public class S3BucketController {
 
     @Autowired

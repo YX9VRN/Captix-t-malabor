@@ -7,13 +7,13 @@ import com.temalabor.temalab.model.User;
 import com.temalabor.temalab.repository.UserRepository;
 import com.temalabor.temalab.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+@Controller
 @CrossOrigin(origins = "http://localhost:4200")
-@RestController
-@RequestMapping("/users")
 public class UserController {
 
 

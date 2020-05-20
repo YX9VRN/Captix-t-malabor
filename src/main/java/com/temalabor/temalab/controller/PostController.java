@@ -10,22 +10,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-@RequestMapping(value = "/posts")
+@Controller
 @CrossOrigin(origins = "http://localhost:4200")
-
 public class PostController {
     @Autowired
     private PostRepository postRepository;
 
     @Autowired
     private CommentRepository commentRepository;
-    @PostMapping()
+    @PostMapping(value = "/posts")
     @ResponseStatus(HttpStatus.CREATED)
     public Post newPost(@RequestBody Post post){
         UserDetails details = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -33,14 +32,14 @@ public class PostController {
         postRepository.save(post);
         return post;
     }
-    @GetMapping()
+    @GetMapping(value = "/posts")
     public List<Post> getPostsByCategory(@RequestParam(value = "category", required = false) String category){
         if(category != null) {
             return postRepository.findAllByCategoryName(category);
         }
         return postRepository.findAll();
     }
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/posts/{id}")
     public Optional<Post> getPostsById(@PathVariable("id") String id) {
         return postRepository.findById(id);
     }
@@ -48,20 +47,20 @@ public class PostController {
     public ResponseEntity<?> getComments(@PathVariable("id") String id){
         return ResponseEntity.ok(commentRepository.findAllByPostId(id));
     }
-    @PostMapping(value = {"/{id}/comments"})
+    @PostMapping(value = "/posts/{id}/comments")
     public ResponseEntity<?> addNewComment(@PathVariable("id") String id, @RequestBody Comment comment){
         UserDetails details = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         comment.setUsername(details.getUsername());
         comment.setPostId(id);
         return ResponseEntity.ok(commentRepository.save(comment));
     }
-    @DeleteMapping(value = "/{id}/comments/{commentId}")
+    @DeleteMapping(value = "/posts/{id}/comments/{commentId}")
     public ResponseEntity<String> deleteComment(@PathVariable("id") String id, @PathVariable("commentId") String commentId){
         commentRepository.deleteById(commentId);
         return ResponseEntity.ok("Comment with "+commentId+" has been deleted");
     }
 
-    @PostMapping(value = "/{id}/vote")
+    @PostMapping(value = "/posts/{id}/vote")
     public void addVote(@PathVariable("id") String id,@RequestBody VoteRequest vote){
         Optional<Post> post = postRepository.findById(id);
         if (vote.getVote().equals("up")){
@@ -70,7 +69,6 @@ public class PostController {
             post.ifPresent(p -> p.setDownVote(p.getDownVote()+1));
         }
         post.ifPresent(p -> postRepository.save(p));
-
     }
 
 }
