@@ -15,8 +15,6 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private int rating;
-    private boolean isAdmin;
     private String profilePictureUrl;
     public  User(){}
 
