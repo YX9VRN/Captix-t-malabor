@@ -9,6 +9,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/contests")
+@CrossOrigin(origins = "http://localhost:4200")
+
 public class ContestController {
 
     @Autowired
