@@ -1,11 +1,7 @@
 package com.temalabor.temalab.controller;
 
-import com.temalabor.temalab.UserDetailServiceImpl;
-import com.temalabor.temalab.model.AuthenticationRequest;
-import com.temalabor.temalab.model.AuthenticationResponse;
 import com.temalabor.temalab.model.User;
 import com.temalabor.temalab.repository.UserRepository;
-import com.temalabor.temalab.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
