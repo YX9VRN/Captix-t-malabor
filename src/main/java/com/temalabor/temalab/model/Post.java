@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @Document
 public class Post {
@@ -20,6 +21,7 @@ public class Post {
     @CreatedDate
     private LocalDateTime dateOfCreation;
     private String categoryName;
+    private ArrayList<Comment> comments = new ArrayList<Comment>();
     public String get_id() {
         return _id;
     }
@@ -90,5 +92,13 @@ public class Post {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<Comment> comments) {
+        this.comments = comments;
     }
 }

@@ -52,6 +52,9 @@ public class PostController {
         UserDetails details = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         comment.setUsername(details.getUsername());
         comment.setPostId(id);
+        Optional<Post> post = postRepository.findById(id);
+        post.ifPresent(p -> p.getComments().add(comment));
+        post.ifPresent(p -> postRepository.save(p));
         return ResponseEntity.ok(commentRepository.save(comment));
     }
     @DeleteMapping(value = "/{id}/comments/{commentId}")
