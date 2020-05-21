@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -64,14 +65,23 @@ public class PostController {
     }
     @PostMapping(value = "/{id}/vote")
     public void addVote(@PathVariable("id") String id,@RequestBody VoteRequest vote){
+        UserDetails details = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<Post> post = postRepository.findById(id);
-        if (vote.getVote().equals("up")){
-            post.ifPresent(p -> p.setUpVote(p.getUpVote()+1));
-        }else if(vote.getVote().equals("down")) {
-            post.ifPresent(p -> p.setDownVote(p.getDownVote()+1));
-        }
-        post.ifPresent(p -> postRepository.save(p));
+        post.ifPresent(new Consumer<Post>() {
+            @Override
+            public void accept(Post post) {
+                if (!post.getVoted().contains(details.getUsername())){
+                    post.getVoted().add(details.getUsername());
+                    if (vote.getVote().equals("up")){
+                         post.setUpVote(post.getUpVote()+1);
+                    }else if(vote.getVote().equals("down")) {
+                        post.setDownVote(post.getDownVote()+1);
+                    }
+                }
+            }
+        });
 
+        post.ifPresent(p -> postRepository.save(p));
     }
 
 }

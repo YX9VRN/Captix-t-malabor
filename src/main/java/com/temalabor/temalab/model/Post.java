@@ -22,6 +22,7 @@ public class Post {
     private LocalDateTime dateOfCreation;
     private String categoryName;
     private ArrayList<Comment> comments = new ArrayList<Comment>();
+    private ArrayList<String> voted = new ArrayList<String>();
     public String get_id() {
         return _id;
     }
@@ -100,5 +101,13 @@ public class Post {
 
     public void setComments(ArrayList<Comment> comments) {
         this.comments = comments;
+    }
+
+    public ArrayList<String> getVoted() {
+        return voted;
+    }
+
+    public void setVoted(ArrayList<String> voted) {
+        this.voted = voted;
     }
 }
