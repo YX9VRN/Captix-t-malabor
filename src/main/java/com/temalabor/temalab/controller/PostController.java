@@ -64,7 +64,7 @@ public class PostController {
         return ResponseEntity.ok("Comment with "+commentId+" has been deleted");
     }
     @PostMapping(value = "/{id}/vote")
-    public void addVote(@PathVariable("id") String id,@RequestBody VoteRequest vote){
+    public ResponseEntity<?> addVote(@PathVariable("id") String id,@RequestBody VoteRequest vote){
         UserDetails details = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<Post> post = postRepository.findById(id);
         post.ifPresent(new Consumer<Post>() {
@@ -80,8 +80,8 @@ public class PostController {
                 }
             }
         });
-
         post.ifPresent(p -> postRepository.save(p));
+        return ResponseEntity.ok(vote);
     }
 
 }
